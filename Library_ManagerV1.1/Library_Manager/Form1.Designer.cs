@@ -33,7 +33,8 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menu_changeTodaysTools = new System.Windows.Forms.ToolStripMenuItem();
+            this.changeTodaysDateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_books = new System.Windows.Forms.Button();
             this.btn_addBook = new System.Windows.Forms.Button();
             this.btn_patrons = new System.Windows.Forms.Button();
@@ -42,13 +43,12 @@
             this.bookName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Book_Type = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CheckoutDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btn_manage = new System.Windows.Forms.Button();
             this.btn_sortByName = new System.Windows.Forms.Button();
             this.btn_goBackBooks = new System.Windows.Forms.Button();
-            this.drp_currentStatus = new System.Windows.Forms.ComboBox();
             this.lbl_currentStatus = new System.Windows.Forms.Label();
             this.btn_cancel = new System.Windows.Forms.Button();
-            this.btn_Ok = new System.Windows.Forms.Button();
             this.lbl_bookName = new System.Windows.Forms.Label();
             this.tbx_bookName = new System.Windows.Forms.TextBox();
             this.drp_addBookType = new System.Windows.Forms.ComboBox();
@@ -91,6 +91,17 @@
             this.lbl_bookId = new System.Windows.Forms.Label();
             this.tbx_bookID = new System.Windows.Forms.TextBox();
             this.lbl_errorBookID = new System.Windows.Forms.Label();
+            this.drp_patronsIds = new System.Windows.Forms.ComboBox();
+            this.lbl_selectAuser = new System.Windows.Forms.Label();
+            this.dat_bookDateCheckedOut = new System.Windows.Forms.DateTimePicker();
+            this.btn_checkout = new System.Windows.Forms.Button();
+            this.lbl_currentStatusDYNAMIC = new System.Windows.Forms.Label();
+            this.btn_checkin = new System.Windows.Forms.Button();
+            this.dat_todaysDate = new System.Windows.Forms.DateTimePicker();
+            this.lbl_todaysdate = new System.Windows.Forms.Label();
+            this.btn_updateDate = new System.Windows.Forms.Button();
+            this.btn_goBackSeePatronsBooks = new System.Windows.Forms.Button();
+            this.lbl_patronRecord = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid_books)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid_patrons)).BeginInit();
@@ -101,10 +112,10 @@
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exitToolStripMenuItem,
-            this.toolsToolStripMenuItem});
+            this.menu_changeTodaysTools});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(882, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1093, 28);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -120,7 +131,7 @@
             // exitToolStripMenuItem1
             // 
             this.exitToolStripMenuItem1.Name = "exitToolStripMenuItem1";
-            this.exitToolStripMenuItem1.Size = new System.Drawing.Size(175, 24);
+            this.exitToolStripMenuItem1.Size = new System.Drawing.Size(119, 24);
             this.exitToolStripMenuItem1.Text = "Exit";
             this.exitToolStripMenuItem1.Click += new System.EventHandler(this.exitToolStripMenuItem1_Click);
             // 
@@ -129,16 +140,26 @@
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(175, 24);
             this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
-            // toolsToolStripMenuItem
+            // menu_changeTodaysTools
             // 
-            this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(57, 24);
-            this.toolsToolStripMenuItem.Text = "Tools";
+            this.menu_changeTodaysTools.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.changeTodaysDateToolStripMenuItem});
+            this.menu_changeTodaysTools.Name = "menu_changeTodaysTools";
+            this.menu_changeTodaysTools.Size = new System.Drawing.Size(57, 24);
+            this.menu_changeTodaysTools.Text = "Tools";
+            // 
+            // changeTodaysDateToolStripMenuItem
+            // 
+            this.changeTodaysDateToolStripMenuItem.Name = "changeTodaysDateToolStripMenuItem";
+            this.changeTodaysDateToolStripMenuItem.Size = new System.Drawing.Size(218, 24);
+            this.changeTodaysDateToolStripMenuItem.Text = "Change Today\'s Date";
+            this.changeTodaysDateToolStripMenuItem.Click += new System.EventHandler(this.changeTodaysDateToolStripMenuItem_Click);
             // 
             // btn_books
             // 
-            this.btn_books.Location = new System.Drawing.Point(274, 76);
+            this.btn_books.Location = new System.Drawing.Point(399, 173);
             this.btn_books.Name = "btn_books";
             this.btn_books.Size = new System.Drawing.Size(270, 69);
             this.btn_books.TabIndex = 1;
@@ -148,7 +169,7 @@
             // 
             // btn_addBook
             // 
-            this.btn_addBook.Location = new System.Drawing.Point(274, 171);
+            this.btn_addBook.Location = new System.Drawing.Point(399, 268);
             this.btn_addBook.Name = "btn_addBook";
             this.btn_addBook.Size = new System.Drawing.Size(270, 69);
             this.btn_addBook.TabIndex = 1;
@@ -158,7 +179,7 @@
             // 
             // btn_patrons
             // 
-            this.btn_patrons.Location = new System.Drawing.Point(274, 264);
+            this.btn_patrons.Location = new System.Drawing.Point(399, 361);
             this.btn_patrons.Name = "btn_patrons";
             this.btn_patrons.Size = new System.Drawing.Size(270, 69);
             this.btn_patrons.TabIndex = 1;
@@ -173,11 +194,12 @@
             this.ID,
             this.bookName,
             this.Book_Type,
-            this.Status});
-            this.dataGrid_books.Location = new System.Drawing.Point(145, 36);
+            this.Status,
+            this.CheckoutDate});
+            this.dataGrid_books.Location = new System.Drawing.Point(30, 95);
             this.dataGrid_books.Name = "dataGrid_books";
             this.dataGrid_books.RowTemplate.Height = 24;
-            this.dataGrid_books.Size = new System.Drawing.Size(522, 351);
+            this.dataGrid_books.Size = new System.Drawing.Size(1033, 356);
             this.dataGrid_books.TabIndex = 2;
             this.dataGrid_books.Visible = false;
             // 
@@ -186,40 +208,49 @@
             this.ID.HeaderText = "ID";
             this.ID.Name = "ID";
             this.ID.ReadOnly = true;
-            this.ID.Width = 50;
             // 
             // bookName
             // 
             this.bookName.HeaderText = "Name";
             this.bookName.Name = "bookName";
             this.bookName.ReadOnly = true;
+            this.bookName.Width = 170;
             // 
             // Book_Type
             // 
             this.Book_Type.HeaderText = "Book Type";
             this.Book_Type.Name = "Book_Type";
             this.Book_Type.ReadOnly = true;
+            this.Book_Type.Width = 170;
             // 
             // Status
             // 
             this.Status.HeaderText = "Status";
             this.Status.Name = "Status";
             this.Status.ReadOnly = true;
+            this.Status.Width = 170;
+            // 
+            // CheckoutDate
+            // 
+            this.CheckoutDate.HeaderText = "Checkout Date";
+            this.CheckoutDate.Name = "CheckoutDate";
+            this.CheckoutDate.ReadOnly = true;
+            this.CheckoutDate.Width = 170;
             // 
             // btn_manage
             // 
-            this.btn_manage.Location = new System.Drawing.Point(147, 393);
+            this.btn_manage.Location = new System.Drawing.Point(264, 457);
             this.btn_manage.Name = "btn_manage";
             this.btn_manage.Size = new System.Drawing.Size(163, 39);
             this.btn_manage.TabIndex = 3;
-            this.btn_manage.Text = "Manage";
+            this.btn_manage.Text = "Manage Selected";
             this.btn_manage.UseVisualStyleBackColor = true;
             this.btn_manage.Visible = false;
             this.btn_manage.Click += new System.EventHandler(this.btn_manage_Click);
             // 
             // btn_sortByName
             // 
-            this.btn_sortByName.Location = new System.Drawing.Point(316, 393);
+            this.btn_sortByName.Location = new System.Drawing.Point(421, 457);
             this.btn_sortByName.Name = "btn_sortByName";
             this.btn_sortByName.Size = new System.Drawing.Size(172, 39);
             this.btn_sortByName.TabIndex = 3;
@@ -230,7 +261,7 @@
             // 
             // btn_goBackBooks
             // 
-            this.btn_goBackBooks.Location = new System.Drawing.Point(494, 393);
+            this.btn_goBackBooks.Location = new System.Drawing.Point(590, 457);
             this.btn_goBackBooks.Name = "btn_goBackBooks";
             this.btn_goBackBooks.Size = new System.Drawing.Size(173, 39);
             this.btn_goBackBooks.TabIndex = 3;
@@ -239,32 +270,19 @@
             this.btn_goBackBooks.Visible = false;
             this.btn_goBackBooks.Click += new System.EventHandler(this.btn_goBackBooks_Click);
             // 
-            // drp_currentStatus
-            // 
-            this.drp_currentStatus.FormattingEnabled = true;
-            this.drp_currentStatus.Items.AddRange(new object[] {
-            "Available",
-            "Checked Out",
-            "Overdue"});
-            this.drp_currentStatus.Location = new System.Drawing.Point(380, 85);
-            this.drp_currentStatus.Name = "drp_currentStatus";
-            this.drp_currentStatus.Size = new System.Drawing.Size(121, 24);
-            this.drp_currentStatus.TabIndex = 4;
-            this.drp_currentStatus.Visible = false;
-            // 
             // lbl_currentStatus
             // 
             this.lbl_currentStatus.AutoSize = true;
-            this.lbl_currentStatus.Location = new System.Drawing.Point(279, 88);
+            this.lbl_currentStatus.Location = new System.Drawing.Point(404, 223);
             this.lbl_currentStatus.Name = "lbl_currentStatus";
-            this.lbl_currentStatus.Size = new System.Drawing.Size(95, 17);
+            this.lbl_currentStatus.Size = new System.Drawing.Size(99, 17);
             this.lbl_currentStatus.TabIndex = 5;
-            this.lbl_currentStatus.Text = "current status";
+            this.lbl_currentStatus.Text = "current status:";
             this.lbl_currentStatus.Visible = false;
             // 
             // btn_cancel
             // 
-            this.btn_cancel.Location = new System.Drawing.Point(400, 346);
+            this.btn_cancel.Location = new System.Drawing.Point(573, 331);
             this.btn_cancel.Name = "btn_cancel";
             this.btn_cancel.Size = new System.Drawing.Size(75, 23);
             this.btn_cancel.TabIndex = 6;
@@ -273,21 +291,10 @@
             this.btn_cancel.Visible = false;
             this.btn_cancel.Click += new System.EventHandler(this.btn_cancel_Click);
             // 
-            // btn_Ok
-            // 
-            this.btn_Ok.Location = new System.Drawing.Point(319, 346);
-            this.btn_Ok.Name = "btn_Ok";
-            this.btn_Ok.Size = new System.Drawing.Size(75, 23);
-            this.btn_Ok.TabIndex = 7;
-            this.btn_Ok.Text = "Ok";
-            this.btn_Ok.UseVisualStyleBackColor = true;
-            this.btn_Ok.Visible = false;
-            this.btn_Ok.Click += new System.EventHandler(this.btn_Ok_Click);
-            // 
             // lbl_bookName
             // 
             this.lbl_bookName.AutoSize = true;
-            this.lbl_bookName.Location = new System.Drawing.Point(279, 182);
+            this.lbl_bookName.Location = new System.Drawing.Point(404, 279);
             this.lbl_bookName.Name = "lbl_bookName";
             this.lbl_bookName.Size = new System.Drawing.Size(81, 17);
             this.lbl_bookName.TabIndex = 8;
@@ -296,7 +303,7 @@
             // 
             // tbx_bookName
             // 
-            this.tbx_bookName.Location = new System.Drawing.Point(366, 182);
+            this.tbx_bookName.Location = new System.Drawing.Point(491, 279);
             this.tbx_bookName.Name = "tbx_bookName";
             this.tbx_bookName.Size = new System.Drawing.Size(157, 22);
             this.tbx_bookName.TabIndex = 10;
@@ -310,7 +317,7 @@
             "Children Book",
             "DVD",
             "Videotape"});
-            this.drp_addBookType.Location = new System.Drawing.Point(366, 210);
+            this.drp_addBookType.Location = new System.Drawing.Point(491, 307);
             this.drp_addBookType.Name = "drp_addBookType";
             this.drp_addBookType.Size = new System.Drawing.Size(157, 24);
             this.drp_addBookType.TabIndex = 11;
@@ -318,7 +325,7 @@
             // 
             // btn_addBookMenu
             // 
-            this.btn_addBookMenu.Location = new System.Drawing.Point(366, 240);
+            this.btn_addBookMenu.Location = new System.Drawing.Point(491, 337);
             this.btn_addBookMenu.Name = "btn_addBookMenu";
             this.btn_addBookMenu.Size = new System.Drawing.Size(75, 23);
             this.btn_addBookMenu.TabIndex = 12;
@@ -329,7 +336,7 @@
             // 
             // btn_cancelBookMenu
             // 
-            this.btn_cancelBookMenu.Location = new System.Drawing.Point(448, 240);
+            this.btn_cancelBookMenu.Location = new System.Drawing.Point(573, 337);
             this.btn_cancelBookMenu.Name = "btn_cancelBookMenu";
             this.btn_cancelBookMenu.Size = new System.Drawing.Size(75, 23);
             this.btn_cancelBookMenu.TabIndex = 12;
@@ -342,7 +349,7 @@
             // 
             this.lbl_errorAddBookName.AutoSize = true;
             this.lbl_errorAddBookName.ForeColor = System.Drawing.Color.Red;
-            this.lbl_errorAddBookName.Location = new System.Drawing.Point(529, 182);
+            this.lbl_errorAddBookName.Location = new System.Drawing.Point(654, 279);
             this.lbl_errorAddBookName.Name = "lbl_errorAddBookName";
             this.lbl_errorAddBookName.Size = new System.Drawing.Size(13, 17);
             this.lbl_errorAddBookName.TabIndex = 12;
@@ -353,7 +360,7 @@
             // 
             this.lbl_errorDropAddBook.AutoSize = true;
             this.lbl_errorDropAddBook.ForeColor = System.Drawing.Color.Red;
-            this.lbl_errorDropAddBook.Location = new System.Drawing.Point(529, 208);
+            this.lbl_errorDropAddBook.Location = new System.Drawing.Point(654, 305);
             this.lbl_errorDropAddBook.Name = "lbl_errorDropAddBook";
             this.lbl_errorDropAddBook.Size = new System.Drawing.Size(13, 17);
             this.lbl_errorDropAddBook.TabIndex = 12;
@@ -372,10 +379,11 @@
             this.patronsOverdueBooks,
             this.patronType,
             this.phoneNumber});
-            this.dataGrid_patrons.Location = new System.Drawing.Point(29, 36);
+            this.dataGrid_patrons.Location = new System.Drawing.Point(30, 95);
             this.dataGrid_patrons.Name = "dataGrid_patrons";
+            this.dataGrid_patrons.ReadOnly = true;
             this.dataGrid_patrons.RowTemplate.Height = 24;
-            this.dataGrid_patrons.Size = new System.Drawing.Size(841, 356);
+            this.dataGrid_patrons.Size = new System.Drawing.Size(1033, 356);
             this.dataGrid_patrons.TabIndex = 13;
             this.dataGrid_patrons.Visible = false;
             // 
@@ -384,6 +392,7 @@
             this.patronId.HeaderText = "ID";
             this.patronId.Name = "patronId";
             this.patronId.ReadOnly = true;
+            this.patronId.Width = 70;
             // 
             // patronLastName
             // 
@@ -396,6 +405,7 @@
             this.patronMinit.HeaderText = "Middle Name Init";
             this.patronMinit.Name = "patronMinit";
             this.patronMinit.ReadOnly = true;
+            this.patronMinit.Width = 70;
             // 
             // patronFirstName
             // 
@@ -429,19 +439,20 @@
             // 
             // btn_seePatronBooks
             // 
-            this.btn_seePatronBooks.Location = new System.Drawing.Point(149, 393);
+            this.btn_seePatronBooks.Location = new System.Drawing.Point(263, 457);
             this.btn_seePatronBooks.Name = "btn_seePatronBooks";
-            this.btn_seePatronBooks.Size = new System.Drawing.Size(172, 39);
+            this.btn_seePatronBooks.Size = new System.Drawing.Size(164, 39);
             this.btn_seePatronBooks.TabIndex = 14;
             this.btn_seePatronBooks.Text = "See Patron\'s Books";
             this.btn_seePatronBooks.UseVisualStyleBackColor = true;
             this.btn_seePatronBooks.Visible = false;
+            this.btn_seePatronBooks.Click += new System.EventHandler(this.btn_seePatronBooks_Click);
             // 
             // btn_addPatron
             // 
-            this.btn_addPatron.Location = new System.Drawing.Point(316, 393);
+            this.btn_addPatron.Location = new System.Drawing.Point(421, 457);
             this.btn_addPatron.Name = "btn_addPatron";
-            this.btn_addPatron.Size = new System.Drawing.Size(185, 39);
+            this.btn_addPatron.Size = new System.Drawing.Size(172, 39);
             this.btn_addPatron.TabIndex = 14;
             this.btn_addPatron.Text = "Add Patron";
             this.btn_addPatron.UseVisualStyleBackColor = true;
@@ -450,7 +461,7 @@
             // 
             // btn_goBackPatrons
             // 
-            this.btn_goBackPatrons.Location = new System.Drawing.Point(498, 393);
+            this.btn_goBackPatrons.Location = new System.Drawing.Point(590, 457);
             this.btn_goBackPatrons.Name = "btn_goBackPatrons";
             this.btn_goBackPatrons.Size = new System.Drawing.Size(173, 39);
             this.btn_goBackPatrons.TabIndex = 15;
@@ -467,7 +478,7 @@
             // 
             // tbx_patronId
             // 
-            this.tbx_patronId.Location = new System.Drawing.Point(367, 125);
+            this.tbx_patronId.Location = new System.Drawing.Point(492, 222);
             this.tbx_patronId.Name = "tbx_patronId";
             this.tbx_patronId.Size = new System.Drawing.Size(121, 22);
             this.tbx_patronId.TabIndex = 17;
@@ -476,7 +487,7 @@
             // lbl_patronId
             // 
             this.lbl_patronId.AutoSize = true;
-            this.lbl_patronId.Location = new System.Drawing.Point(339, 123);
+            this.lbl_patronId.Location = new System.Drawing.Point(464, 220);
             this.lbl_patronId.Name = "lbl_patronId";
             this.lbl_patronId.Size = new System.Drawing.Size(21, 17);
             this.lbl_patronId.TabIndex = 18;
@@ -485,7 +496,7 @@
             // 
             // tbx_patronFirstName
             // 
-            this.tbx_patronFirstName.Location = new System.Drawing.Point(367, 153);
+            this.tbx_patronFirstName.Location = new System.Drawing.Point(492, 250);
             this.tbx_patronFirstName.Name = "tbx_patronFirstName";
             this.tbx_patronFirstName.Size = new System.Drawing.Size(121, 22);
             this.tbx_patronFirstName.TabIndex = 18;
@@ -493,7 +504,7 @@
             // 
             // tbx_patronMinit
             // 
-            this.tbx_patronMinit.Location = new System.Drawing.Point(367, 181);
+            this.tbx_patronMinit.Location = new System.Drawing.Point(492, 278);
             this.tbx_patronMinit.Name = "tbx_patronMinit";
             this.tbx_patronMinit.Size = new System.Drawing.Size(121, 22);
             this.tbx_patronMinit.TabIndex = 19;
@@ -502,7 +513,7 @@
             // lbl_mInit
             // 
             this.lbl_mInit.AutoSize = true;
-            this.lbl_mInit.Location = new System.Drawing.Point(289, 184);
+            this.lbl_mInit.Location = new System.Drawing.Point(414, 281);
             this.lbl_mInit.Name = "lbl_mInit";
             this.lbl_mInit.Size = new System.Drawing.Size(71, 17);
             this.lbl_mInit.TabIndex = 18;
@@ -511,7 +522,7 @@
             // 
             // tbx_patronLastName
             // 
-            this.tbx_patronLastName.Location = new System.Drawing.Point(367, 209);
+            this.tbx_patronLastName.Location = new System.Drawing.Point(492, 306);
             this.tbx_patronLastName.Name = "tbx_patronLastName";
             this.tbx_patronLastName.Size = new System.Drawing.Size(121, 22);
             this.tbx_patronLastName.TabIndex = 20;
@@ -520,7 +531,7 @@
             // lbl_LastName
             // 
             this.lbl_LastName.AutoSize = true;
-            this.lbl_LastName.Location = new System.Drawing.Point(285, 214);
+            this.lbl_LastName.Location = new System.Drawing.Point(410, 311);
             this.lbl_LastName.Name = "lbl_LastName";
             this.lbl_LastName.Size = new System.Drawing.Size(76, 17);
             this.lbl_LastName.TabIndex = 18;
@@ -533,7 +544,7 @@
             this.drp_patronType.Items.AddRange(new object[] {
             "Adult",
             "Children"});
-            this.drp_patronType.Location = new System.Drawing.Point(367, 268);
+            this.drp_patronType.Location = new System.Drawing.Point(492, 365);
             this.drp_patronType.Name = "drp_patronType";
             this.drp_patronType.Size = new System.Drawing.Size(118, 24);
             this.drp_patronType.TabIndex = 22;
@@ -542,7 +553,7 @@
             // lbl_patronFirstName
             // 
             this.lbl_patronFirstName.AutoSize = true;
-            this.lbl_patronFirstName.Location = new System.Drawing.Point(284, 156);
+            this.lbl_patronFirstName.Location = new System.Drawing.Point(409, 253);
             this.lbl_patronFirstName.Name = "lbl_patronFirstName";
             this.lbl_patronFirstName.Size = new System.Drawing.Size(76, 17);
             this.lbl_patronFirstName.TabIndex = 18;
@@ -553,7 +564,7 @@
             // 
             this.lbl_errorId.AutoSize = true;
             this.lbl_errorId.ForeColor = System.Drawing.Color.Red;
-            this.lbl_errorId.Location = new System.Drawing.Point(494, 128);
+            this.lbl_errorId.Location = new System.Drawing.Point(619, 225);
             this.lbl_errorId.Name = "lbl_errorId";
             this.lbl_errorId.Size = new System.Drawing.Size(13, 17);
             this.lbl_errorId.TabIndex = 20;
@@ -564,7 +575,7 @@
             // 
             this.lbl_errorName.AutoSize = true;
             this.lbl_errorName.ForeColor = System.Drawing.Color.Red;
-            this.lbl_errorName.Location = new System.Drawing.Point(494, 156);
+            this.lbl_errorName.Location = new System.Drawing.Point(619, 253);
             this.lbl_errorName.Name = "lbl_errorName";
             this.lbl_errorName.Size = new System.Drawing.Size(13, 17);
             this.lbl_errorName.TabIndex = 20;
@@ -575,7 +586,7 @@
             // 
             this.lbl_errorMiddleInit.AutoSize = true;
             this.lbl_errorMiddleInit.ForeColor = System.Drawing.Color.Red;
-            this.lbl_errorMiddleInit.Location = new System.Drawing.Point(494, 184);
+            this.lbl_errorMiddleInit.Location = new System.Drawing.Point(619, 281);
             this.lbl_errorMiddleInit.Name = "lbl_errorMiddleInit";
             this.lbl_errorMiddleInit.Size = new System.Drawing.Size(13, 17);
             this.lbl_errorMiddleInit.TabIndex = 20;
@@ -586,7 +597,7 @@
             // 
             this.lbl_errorLastName.AutoSize = true;
             this.lbl_errorLastName.ForeColor = System.Drawing.Color.Red;
-            this.lbl_errorLastName.Location = new System.Drawing.Point(494, 214);
+            this.lbl_errorLastName.Location = new System.Drawing.Point(619, 311);
             this.lbl_errorLastName.Name = "lbl_errorLastName";
             this.lbl_errorLastName.Size = new System.Drawing.Size(13, 17);
             this.lbl_errorLastName.TabIndex = 20;
@@ -597,7 +608,7 @@
             // 
             this.lbl_errorPatronType.AutoSize = true;
             this.lbl_errorPatronType.ForeColor = System.Drawing.Color.Red;
-            this.lbl_errorPatronType.Location = new System.Drawing.Point(494, 271);
+            this.lbl_errorPatronType.Location = new System.Drawing.Point(619, 368);
             this.lbl_errorPatronType.Name = "lbl_errorPatronType";
             this.lbl_errorPatronType.Size = new System.Drawing.Size(13, 17);
             this.lbl_errorPatronType.TabIndex = 20;
@@ -606,7 +617,7 @@
             // 
             // tbx_phoneNumber
             // 
-            this.tbx_phoneNumber.Location = new System.Drawing.Point(367, 237);
+            this.tbx_phoneNumber.Location = new System.Drawing.Point(492, 334);
             this.tbx_phoneNumber.Name = "tbx_phoneNumber";
             this.tbx_phoneNumber.Size = new System.Drawing.Size(121, 22);
             this.tbx_phoneNumber.TabIndex = 21;
@@ -615,7 +626,7 @@
             // lbl_phoneNumber
             // 
             this.lbl_phoneNumber.AutoSize = true;
-            this.lbl_phoneNumber.Location = new System.Drawing.Point(257, 242);
+            this.lbl_phoneNumber.Location = new System.Drawing.Point(382, 339);
             this.lbl_phoneNumber.Name = "lbl_phoneNumber";
             this.lbl_phoneNumber.Size = new System.Drawing.Size(103, 17);
             this.lbl_phoneNumber.TabIndex = 18;
@@ -626,7 +637,7 @@
             // 
             this.lbl_errorPhoneNumber.AutoSize = true;
             this.lbl_errorPhoneNumber.ForeColor = System.Drawing.Color.Red;
-            this.lbl_errorPhoneNumber.Location = new System.Drawing.Point(494, 242);
+            this.lbl_errorPhoneNumber.Location = new System.Drawing.Point(619, 339);
             this.lbl_errorPhoneNumber.Name = "lbl_errorPhoneNumber";
             this.lbl_errorPhoneNumber.Size = new System.Drawing.Size(13, 17);
             this.lbl_errorPhoneNumber.TabIndex = 20;
@@ -635,7 +646,7 @@
             // 
             // btn_addPatronToDB
             // 
-            this.btn_addPatronToDB.Location = new System.Drawing.Point(347, 315);
+            this.btn_addPatronToDB.Location = new System.Drawing.Point(472, 412);
             this.btn_addPatronToDB.Name = "btn_addPatronToDB";
             this.btn_addPatronToDB.Size = new System.Drawing.Size(75, 23);
             this.btn_addPatronToDB.TabIndex = 23;
@@ -646,7 +657,7 @@
             // 
             // btn_cancelPatron
             // 
-            this.btn_cancelPatron.Location = new System.Drawing.Point(431, 315);
+            this.btn_cancelPatron.Location = new System.Drawing.Point(556, 412);
             this.btn_cancelPatron.Name = "btn_cancelPatron";
             this.btn_cancelPatron.Size = new System.Drawing.Size(75, 23);
             this.btn_cancelPatron.TabIndex = 24;
@@ -658,7 +669,7 @@
             // lbl_bookId
             // 
             this.lbl_bookId.AutoSize = true;
-            this.lbl_bookId.Location = new System.Drawing.Point(279, 156);
+            this.lbl_bookId.Location = new System.Drawing.Point(404, 253);
             this.lbl_bookId.Name = "lbl_bookId";
             this.lbl_bookId.Size = new System.Drawing.Size(57, 17);
             this.lbl_bookId.TabIndex = 8;
@@ -667,7 +678,7 @@
             // 
             // tbx_bookID
             // 
-            this.tbx_bookID.Location = new System.Drawing.Point(366, 156);
+            this.tbx_bookID.Location = new System.Drawing.Point(491, 253);
             this.tbx_bookID.Name = "tbx_bookID";
             this.tbx_bookID.Size = new System.Drawing.Size(157, 22);
             this.tbx_bookID.TabIndex = 9;
@@ -677,28 +688,145 @@
             // 
             this.lbl_errorBookID.AutoSize = true;
             this.lbl_errorBookID.ForeColor = System.Drawing.Color.Red;
-            this.lbl_errorBookID.Location = new System.Drawing.Point(529, 156);
+            this.lbl_errorBookID.Location = new System.Drawing.Point(654, 253);
             this.lbl_errorBookID.Name = "lbl_errorBookID";
             this.lbl_errorBookID.Size = new System.Drawing.Size(13, 17);
             this.lbl_errorBookID.TabIndex = 12;
             this.lbl_errorBookID.Text = "*";
             this.lbl_errorBookID.Visible = false;
             // 
+            // drp_patronsIds
+            // 
+            this.drp_patronsIds.FormattingEnabled = true;
+            this.drp_patronsIds.Location = new System.Drawing.Point(505, 254);
+            this.drp_patronsIds.Name = "drp_patronsIds";
+            this.drp_patronsIds.Size = new System.Drawing.Size(121, 24);
+            this.drp_patronsIds.TabIndex = 25;
+            this.drp_patronsIds.Visible = false;
+            // 
+            // lbl_selectAuser
+            // 
+            this.lbl_selectAuser.AutoSize = true;
+            this.lbl_selectAuser.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lbl_selectAuser.Location = new System.Drawing.Point(359, 254);
+            this.lbl_selectAuser.Name = "lbl_selectAuser";
+            this.lbl_selectAuser.Size = new System.Drawing.Size(140, 17);
+            this.lbl_selectAuser.TabIndex = 26;
+            this.lbl_selectAuser.Text = "Please select a user:";
+            this.lbl_selectAuser.Visible = false;
+            // 
+            // dat_bookDateCheckedOut
+            // 
+            this.dat_bookDateCheckedOut.Enabled = false;
+            this.dat_bookDateCheckedOut.Location = new System.Drawing.Point(426, 289);
+            this.dat_bookDateCheckedOut.Name = "dat_bookDateCheckedOut";
+            this.dat_bookDateCheckedOut.Size = new System.Drawing.Size(200, 22);
+            this.dat_bookDateCheckedOut.TabIndex = 27;
+            this.dat_bookDateCheckedOut.Visible = false;
+            // 
+            // btn_checkout
+            // 
+            this.btn_checkout.Location = new System.Drawing.Point(362, 331);
+            this.btn_checkout.Name = "btn_checkout";
+            this.btn_checkout.Size = new System.Drawing.Size(99, 23);
+            this.btn_checkout.TabIndex = 28;
+            this.btn_checkout.Text = "Checkout";
+            this.btn_checkout.UseVisualStyleBackColor = true;
+            this.btn_checkout.Visible = false;
+            this.btn_checkout.Click += new System.EventHandler(this.btn_checkout_Click);
+            // 
+            // lbl_currentStatusDYNAMIC
+            // 
+            this.lbl_currentStatusDYNAMIC.AutoSize = true;
+            this.lbl_currentStatusDYNAMIC.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_currentStatusDYNAMIC.Location = new System.Drawing.Point(520, 223);
+            this.lbl_currentStatusDYNAMIC.Name = "lbl_currentStatusDYNAMIC";
+            this.lbl_currentStatusDYNAMIC.Size = new System.Drawing.Size(74, 17);
+            this.lbl_currentStatusDYNAMIC.TabIndex = 29;
+            this.lbl_currentStatusDYNAMIC.Text = "Available";
+            this.lbl_currentStatusDYNAMIC.Visible = false;
+            // 
+            // btn_checkin
+            // 
+            this.btn_checkin.Location = new System.Drawing.Point(468, 331);
+            this.btn_checkin.Name = "btn_checkin";
+            this.btn_checkin.Size = new System.Drawing.Size(99, 23);
+            this.btn_checkin.TabIndex = 30;
+            this.btn_checkin.Text = "Checkin";
+            this.btn_checkin.UseVisualStyleBackColor = true;
+            this.btn_checkin.Visible = false;
+            this.btn_checkin.Click += new System.EventHandler(this.btn_checkin_Click);
+            // 
+            // dat_todaysDate
+            // 
+            this.dat_todaysDate.Enabled = false;
+            this.dat_todaysDate.Location = new System.Drawing.Point(863, 67);
+            this.dat_todaysDate.Name = "dat_todaysDate";
+            this.dat_todaysDate.Size = new System.Drawing.Size(200, 22);
+            this.dat_todaysDate.TabIndex = 31;
+            // 
+            // lbl_todaysdate
+            // 
+            this.lbl_todaysdate.AutoSize = true;
+            this.lbl_todaysdate.Location = new System.Drawing.Point(918, 47);
+            this.lbl_todaysdate.Name = "lbl_todaysdate";
+            this.lbl_todaysdate.Size = new System.Drawing.Size(98, 17);
+            this.lbl_todaysdate.TabIndex = 32;
+            this.lbl_todaysdate.Text = "Today\'s date: ";
+            // 
+            // btn_updateDate
+            // 
+            this.btn_updateDate.Location = new System.Drawing.Point(907, 21);
+            this.btn_updateDate.Name = "btn_updateDate";
+            this.btn_updateDate.Size = new System.Drawing.Size(119, 23);
+            this.btn_updateDate.TabIndex = 33;
+            this.btn_updateDate.Text = "Update date";
+            this.btn_updateDate.UseVisualStyleBackColor = true;
+            this.btn_updateDate.Visible = false;
+            this.btn_updateDate.Click += new System.EventHandler(this.btn_updateDate_Click);
+            // 
+            // btn_goBackSeePatronsBooks
+            // 
+            this.btn_goBackSeePatronsBooks.Location = new System.Drawing.Point(421, 457);
+            this.btn_goBackSeePatronsBooks.Name = "btn_goBackSeePatronsBooks";
+            this.btn_goBackSeePatronsBooks.Size = new System.Drawing.Size(172, 39);
+            this.btn_goBackSeePatronsBooks.TabIndex = 34;
+            this.btn_goBackSeePatronsBooks.Text = "Go Back";
+            this.btn_goBackSeePatronsBooks.UseVisualStyleBackColor = true;
+            this.btn_goBackSeePatronsBooks.Visible = false;
+            this.btn_goBackSeePatronsBooks.Click += new System.EventHandler(this.btn_goBackSeePatronsBooks_Click);
+            // 
+            // lbl_patronRecord
+            // 
+            this.lbl_patronRecord.AutoSize = true;
+            this.lbl_patronRecord.Location = new System.Drawing.Point(489, 72);
+            this.lbl_patronRecord.Name = "lbl_patronRecord";
+            this.lbl_patronRecord.Size = new System.Drawing.Size(46, 17);
+            this.lbl_patronRecord.TabIndex = 35;
+            this.lbl_patronRecord.Text = "label1";
+            this.lbl_patronRecord.Visible = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(882, 444);
-            this.Controls.Add(this.btn_Ok);
+            this.ClientSize = new System.Drawing.Size(1093, 537);
+            this.Controls.Add(this.lbl_patronRecord);
+            this.Controls.Add(this.btn_goBackSeePatronsBooks);
+            this.Controls.Add(this.btn_updateDate);
+            this.Controls.Add(this.lbl_todaysdate);
+            this.Controls.Add(this.dat_todaysDate);
+            this.Controls.Add(this.btn_checkin);
+            this.Controls.Add(this.lbl_currentStatusDYNAMIC);
+            this.Controls.Add(this.btn_checkout);
+            this.Controls.Add(this.dat_bookDateCheckedOut);
+            this.Controls.Add(this.lbl_selectAuser);
+            this.Controls.Add(this.drp_patronsIds);
             this.Controls.Add(this.btn_cancel);
             this.Controls.Add(this.btn_goBackBooks);
             this.Controls.Add(this.btn_sortByName);
-            this.Controls.Add(this.btn_manage);
             this.Controls.Add(this.menuStrip1);
-            this.Controls.Add(this.drp_currentStatus);
             this.Controls.Add(this.lbl_currentStatus);
-            this.Controls.Add(this.dataGrid_patrons);
-            this.Controls.Add(this.dataGrid_books);
             this.Controls.Add(this.btn_patrons);
             this.Controls.Add(this.btn_books);
             this.Controls.Add(this.btn_addBook);
@@ -734,6 +862,9 @@
             this.Controls.Add(this.btn_addPatron);
             this.Controls.Add(this.btn_goBackPatrons);
             this.Controls.Add(this.btn_seePatronBooks);
+            this.Controls.Add(this.btn_manage);
+            this.Controls.Add(this.dataGrid_patrons);
+            this.Controls.Add(this.dataGrid_books);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "Library";
@@ -754,7 +885,7 @@
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem menu_changeTodaysTools;
         private System.Windows.Forms.Button btn_books;
         private System.Windows.Forms.Button btn_addBook;
         private System.Windows.Forms.Button btn_patrons;
@@ -762,10 +893,8 @@
         private System.Windows.Forms.Button btn_manage;
         private System.Windows.Forms.Button btn_sortByName;
         private System.Windows.Forms.Button btn_goBackBooks;
-        private System.Windows.Forms.ComboBox drp_currentStatus;
         private System.Windows.Forms.Label lbl_currentStatus;
         private System.Windows.Forms.Button btn_cancel;
-        private System.Windows.Forms.Button btn_Ok;
         private System.Windows.Forms.Label lbl_bookName;
         private System.Windows.Forms.TextBox tbx_bookName;
         private System.Windows.Forms.ComboBox drp_addBookType;
@@ -773,21 +902,10 @@
         private System.Windows.Forms.Button btn_cancelBookMenu;
         private System.Windows.Forms.Label lbl_errorAddBookName;
         private System.Windows.Forms.Label lbl_errorDropAddBook;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn bookName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Book_Type;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Status;
         private System.Windows.Forms.DataGridView dataGrid_patrons;
-        private System.Windows.Forms.DataGridViewTextBoxColumn patronId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn patronLastName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn patronMinit;
-        private System.Windows.Forms.DataGridViewTextBoxColumn patronFirstName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CheckedOutBooks;
-        private System.Windows.Forms.DataGridViewTextBoxColumn patronsOverdueBooks;
         private System.Windows.Forms.Button btn_seePatronBooks;
         private System.Windows.Forms.Button btn_addPatron;
         private System.Windows.Forms.Button btn_goBackPatrons;
-        private System.Windows.Forms.DataGridViewTextBoxColumn patronType;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.TextBox tbx_patronId;
         private System.Windows.Forms.Label lbl_patronId;
@@ -811,7 +929,31 @@
         private System.Windows.Forms.Label lbl_bookId;
         private System.Windows.Forms.TextBox tbx_bookID;
         private System.Windows.Forms.Label lbl_errorBookID;
+        private System.Windows.Forms.ComboBox drp_patronsIds;
+        private System.Windows.Forms.Label lbl_selectAuser;
+        private System.Windows.Forms.DateTimePicker dat_bookDateCheckedOut;
+        private System.Windows.Forms.Button btn_checkout;
+        private System.Windows.Forms.Label lbl_currentStatusDYNAMIC;
+        private System.Windows.Forms.Button btn_checkin;
+        private System.Windows.Forms.DateTimePicker dat_todaysDate;
+        private System.Windows.Forms.Label lbl_todaysdate;
+        private System.Windows.Forms.Button btn_updateDate;
+        private System.Windows.Forms.ToolStripMenuItem changeTodaysDateToolStripMenuItem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn bookName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Book_Type;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Status;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CheckoutDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn patronId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn patronLastName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn patronMinit;
+        private System.Windows.Forms.DataGridViewTextBoxColumn patronFirstName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CheckedOutBooks;
+        private System.Windows.Forms.DataGridViewTextBoxColumn patronsOverdueBooks;
+        private System.Windows.Forms.DataGridViewTextBoxColumn patronType;
         private System.Windows.Forms.DataGridViewTextBoxColumn phoneNumber;
+        private System.Windows.Forms.Button btn_goBackSeePatronsBooks;
+        private System.Windows.Forms.Label lbl_patronRecord;
     }
 }
 

@@ -28,7 +28,7 @@ namespace Library_Manager
             set { bookName = value; }
         }
 
-        public uint Id
+        public uint ID
         {
             get { return bookId; }
             set { bookId = value; }
@@ -44,6 +44,12 @@ namespace Library_Manager
         {
             get { return bookType; }
             set { bookType = value; }
+        }
+
+        public DateTime CheckoutDate
+        {
+            get;
+            set;
         }
 
     }//end class

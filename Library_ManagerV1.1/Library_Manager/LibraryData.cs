@@ -23,5 +23,7 @@ namespace Library_Manager
             this.Books = Books;
             this.Patrons = Patrons;
         }
+
+        public DateTime CurrentDate { get; set; }
     }
 }

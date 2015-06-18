@@ -14,7 +14,8 @@ namespace Library_Manager
     {
         private BusinessRules br;
         private OpenFileDialog _openDialog = new OpenFileDialog();
-        private string currentBookId
+        private Book currentBook = null;
+
         public Form1()
         {
             InitializeComponent();
@@ -22,6 +23,7 @@ namespace Library_Manager
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            MessageBox.Show("First select the file where information is stored");
             br = BusinessRules.GetInstance();
             //prompt to open file
             _openDialog.Filter = "Binary Files *.bin|*.bin|Serialized Path *.ser|*.ser";
@@ -35,25 +37,14 @@ namespace Library_Manager
             {
                 this.Close();
             }
-            //load tables
-            foreach (Book book in br.Books)
-            {
-                string[] row = { book.Id.ToString(), book.Name, book.Type.ToString(), book.BookStatus.ToString() };
-                dataGrid_books.Rows.Add(row);
-            }
-
-            foreach (Patron patron in br.Patrons)
-            {
-                string[] row = { patron.ID.ToString(), patron.LastName, patron.MidInit, patron.FirstName, patron.Books.Count.ToString(), patron.OverdueBooks.Count.ToString(), patron.PatronType, patron.PhoneNumber };
-                dataGrid_patrons.Rows.Add(row);
-            }
+            dat_todaysDate.Value = br.currentDate;
+            br.checkDatesOfCheckedOutBooks();
         }
 
         private void btn_books_Click(object sender, EventArgs e)
         {
             hideMainMenu();
             showBooksMenu();
-            //display all books in the dataGridView
         }
 
         private void showBooksMenu()
@@ -62,6 +53,24 @@ namespace Library_Manager
             btn_manage.Visible = true;
             btn_sortByName.Visible = true;
             btn_goBackBooks.Visible = true;
+            //display all books in the dataGridView
+            //load tables
+            dataGrid_books.Rows.Clear();
+            foreach (Book book in br.Books)
+            {
+                string[] row = null;
+                if (book.BookStatus == Library_Manager.Status.Available)
+                {
+                    string[] tmprow = { book.ID.ToString(), book.Name, book.Type.ToString(), book.BookStatus.ToString(), "" };
+                    row = tmprow;
+                }
+                else
+                {
+                    string[] tmprow = { book.ID.ToString(), book.Name, book.Type.ToString(), book.BookStatus.ToString(), book.CheckoutDate.ToString() };
+                    row = tmprow;
+                }
+                dataGrid_books.Rows.Add(row);
+            }
         }
 
         private void hideMainMenu()
@@ -89,11 +98,20 @@ namespace Library_Manager
         private void showManageMenu()
         {
             lbl_currentStatus.Visible = true;
-            drp_currentStatus.Visible = true;
+            lbl_currentStatusDYNAMIC.Visible = true;
             btn_cancel.Visible = true;
-            btn_Ok.Visible = true;
-            //display current status of book
-
+            btn_checkin.Visible = true;
+            btn_checkout.Visible = true;
+            lbl_currentStatusDYNAMIC.Text = currentBook.BookStatus.ToString();
+            lbl_selectAuser.Visible = true;
+            drp_patronsIds.Visible = true;
+            dat_bookDateCheckedOut.Visible = true;
+            drp_patronsIds.Items.Clear();
+            drp_patronsIds.Text = "Select One";
+            foreach (Patron p in br.Patrons)
+            {
+                drp_patronsIds.Items.Add(p.ID);
+            }
         }
 
         private void showPatronsMenu()
@@ -102,6 +120,12 @@ namespace Library_Manager
             btn_addPatron.Visible = true;
             btn_seePatronBooks.Visible = true;
             btn_goBackPatrons.Visible = true;
+            dataGrid_patrons.Rows.Clear();
+            foreach (Patron patron in br.Patrons)
+            {
+                string[] row = { patron.ID.ToString(), patron.LastName, patron.MidInit, patron.FirstName, patron.Books.Count.ToString(), patron.OverdueBooks.Count.ToString(), patron.PatronType, patron.PhoneNumber };
+                dataGrid_patrons.Rows.Add(row);
+            }
         }
 
         private void hidePatronsMenu()
@@ -115,9 +139,13 @@ namespace Library_Manager
         private void hideManageMenu() 
         {
             lbl_currentStatus.Visible = false;
-            drp_currentStatus.Visible = false;
+            lbl_currentStatusDYNAMIC.Visible = false;
             btn_cancel.Visible = false;
-            btn_Ok.Visible = false;
+            lbl_selectAuser.Visible = false;
+            drp_patronsIds.Visible = false;
+            dat_bookDateCheckedOut.Visible = false;
+            btn_checkin.Visible = false;
+            btn_checkout.Visible = false;
         }
 
         private void btn_goBackBooks_Click(object sender, EventArgs e)
@@ -130,14 +158,9 @@ namespace Library_Manager
         {
             hideBooksMenu();
             DataGridViewRow row = this.dataGrid_books.Rows[dataGrid_books.CurrentRow.Index];
-            currentBookId = row.Cells["ID"].Value.ToString();
+            uint currentBookId = uint.Parse(row.Cells["ID"].Value.ToString());
+            currentBook = br.getBook(currentBookId);
             showManageMenu();
-        }
-
-
-        private void btn_Ok_Click(object sender, EventArgs e)
-        {
-            
         }
 
         private void btn_cancel_Click(object sender, EventArgs e)
@@ -207,7 +230,7 @@ namespace Library_Manager
                 Book book = new Book(uint.Parse(bookId), bookName, Library_Manager.Status.Available, bt);
                 br.Books.Add(book);
 
-                string[] row = { book.Id.ToString(), book.Name, book.Type.ToString(), book.BookStatus.ToString()};
+                string[] row = { book.ID.ToString(), book.Name, book.Type.ToString(), book.BookStatus.ToString()};
                 dataGrid_books.Rows.Add(row);
                 MessageBox.Show("Book added successfully");
                 showAddBookMenu();
@@ -435,6 +458,129 @@ namespace Library_Manager
             br.writeToDiskFile();
         }
 
+        private void btn_checkout_Click(object sender, EventArgs e)
+        {
+            bool allOk = true;
+            //validate
+            if (drp_patronsIds.Text == "Select One")
+            {
+                allOk = false;
+                MessageBox.Show("Please Select a Patron ID, it is required");
+            }
+            if (allOk == true)
+            {
+                dat_bookDateCheckedOut.Value = dat_todaysDate.Value;
+                Patron patron = br.getPatron(uint.Parse(drp_patronsIds.Text));
+                string message = br.validate_checkout(patron, currentBook);
 
+                if (message == "success")
+                {
+                    br.checkout(patron,currentBook,dat_bookDateCheckedOut.Value);
+                    MessageBox.Show("Book checked out successfully");
+                    hideManageMenu();
+                    showBooksMenu();
+                }
+                else
+                {
+                    MessageBox.Show(message);
+                }
+            }
+        }
+
+        private void btn_updateDate_Click(object sender, EventArgs e)
+        {
+            btn_updateDate.Visible = false;
+            dat_todaysDate.Enabled = false;
+            br.currentDate = dat_todaysDate.Value;
+
+            //update tables and data
+            br.checkDatesOfCheckedOutBooks();
+            dataGrid_patrons.Rows.Clear();
+            foreach (Patron patron in br.Patrons)
+            {
+                string[] row = { patron.ID.ToString(), patron.LastName, patron.MidInit, patron.FirstName, patron.Books.Count.ToString(), patron.OverdueBooks.Count.ToString(), patron.PatronType, patron.PhoneNumber };
+                dataGrid_patrons.Rows.Add(row);
+            }
+            dataGrid_books.Rows.Clear();
+            foreach (Book book in br.Books)
+            {
+                string[] row = null;
+                if (book.BookStatus == Library_Manager.Status.Available)
+                {
+                    string[] tmprow = { book.ID.ToString(), book.Name, book.Type.ToString(), book.BookStatus.ToString(), "" };
+                    row = tmprow;
+                }
+                else
+                {
+                    string[] tmprow = { book.ID.ToString(), book.Name, book.Type.ToString(), book.BookStatus.ToString(), book.CheckoutDate.ToString() };
+                    row = tmprow;
+                }
+                dataGrid_books.Rows.Add(row);
+            }
+        }
+
+        private void changeTodaysDateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Change the date and then click Update button");
+            dat_todaysDate.Enabled = true;
+            btn_updateDate.Visible = true;
+        }
+
+        private void btn_checkin_Click(object sender, EventArgs e)
+        {
+            if (currentBook.BookStatus != Library_Manager.Status.Available)
+            {
+                br.checkin(currentBook);
+                MessageBox.Show("Book checked in successfully");
+                hideManageMenu();
+                showBooksMenu();
+            }
+            else
+            {
+                MessageBox.Show("Book is already Available");
+            }
+        }
+
+        private void btn_seePatronBooks_Click(object sender, EventArgs e)
+        {
+            hidePatronsMenu();
+
+            DataGridViewRow patronRow = this.dataGrid_patrons.Rows[dataGrid_patrons.CurrentRow.Index];
+            uint currentPatronId = uint.Parse(patronRow.Cells["patronID"].Value.ToString());
+            Patron currentPatron = br.getPatron(currentPatronId);
+            lbl_patronRecord.Visible = true;
+            lbl_patronRecord.Text = "ID: " + currentPatron.ID + ", Name: " + currentPatron.FirstName + " " + currentPatron.MidInit + " " + currentPatron.LastName;
+            dataGrid_books.Rows.Clear();
+            foreach (Book book in currentPatron.Books)
+            {
+                string[] row = null;
+                if (book.BookStatus == Library_Manager.Status.Available)
+                {
+                    string[] tmprow = { book.ID.ToString(), book.Name, book.Type.ToString(), book.BookStatus.ToString(), "" };
+                    row = tmprow;
+                }
+                else
+                {
+                    string[] tmprow = { book.ID.ToString(), book.Name, book.Type.ToString(), book.BookStatus.ToString(), book.CheckoutDate.ToString() };
+                    row = tmprow;
+                }
+                dataGrid_books.Rows.Add(row);
+            }
+            dataGrid_books.Visible = true;
+            btn_goBackSeePatronsBooks.Visible = true;
+        }//end btn_seePatronBooks_Click
+
+        private void btn_goBackSeePatronsBooks_Click(object sender, EventArgs e)
+        {
+            btn_goBackSeePatronsBooks.Visible = false;
+            lbl_patronRecord.Visible = false;
+            dataGrid_books.Visible = false;
+            showPatronsMenu();
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Library Manager Project\nMade by the C# team\nCS2450\nSUMMER 2015");
+        }
     }//end class Form1
 }//end namespace
